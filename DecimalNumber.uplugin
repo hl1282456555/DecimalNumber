@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "DecimalNumber",
+	"Description": "A wrapper of  boost-multiprecision for high precision math.",
+	"Category": "Number",
+	"CreatedBy": "OtakuLuo",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "DecimalNumber",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
