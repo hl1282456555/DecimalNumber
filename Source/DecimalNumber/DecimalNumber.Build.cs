@@ -5,11 +5,19 @@ using UnrealBuildTool;
 
 public class DecimalNumber : ModuleRules
 {
+    private string ThirdPartyDir
+	{
+		get
+		{
+			return Path.GetFullPath(Path.Combine(ModuleDirectory, "../../ThirdParty/boost_multiprecision_1.8.5"));
+		}
+	}
+
 	public DecimalNumber(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
-		string ThirdPartyDir = Path.Combine(ModuleDirectory, "../../ThirdParty/boost_multiprecision_1.8.5");
+		//string ThirdPartyDir = Path.Combine(ModuleDirectory, "../../ThirdParty/boost_multiprecision_1.8.5");
 		
 		PublicIncludePaths.Add(Path.Combine(ThirdPartyDir, "include"));
 		
@@ -25,16 +33,16 @@ public class DecimalNumber : ModuleRules
 		PublicDelayLoadDLLs.AddRange(
 			new string[]
 			{
-				"boost_container-vc144-mt-x64-1_85.dll",
-				"boost_random-vc144-mt-x64-1_85.dll",
-				"boost_regex-vc144-mt-x64-1_85.dll",
-				"boost_system-vc144-mt-x64-1_85.dll"
+				Path.Combine(ThirdPartyDir,"boost_container-vc144-mt-x64-1_85.dll"),
+				Path.Combine(ThirdPartyDir,"boost_random-vc144-mt-x64-1_85.dll"),
+				Path.Combine(ThirdPartyDir,"boost_regex-vc144-mt-x64-1_85.dll"),
+				Path.Combine(ThirdPartyDir,"boost_system-vc144-mt-x64-1_85.dll")
 			});
 		
-		RuntimeDependencies.Add(Path.Combine(ThirdPartyDir, "/bin/boost_container-vc144-mt-x64-1_85.dll"));
-		RuntimeDependencies.Add(Path.Combine(ThirdPartyDir, "/bin/boost_random-vc144-mt-x64-1_85.dll"));
-		RuntimeDependencies.Add(Path.Combine(ThirdPartyDir, "/bin/boost_regex-vc144-mt-x64-1_85.dll"));
-		RuntimeDependencies.Add(Path.Combine(ThirdPartyDir, "/bin/boost_system-vc144-mt-x64-1_85.dll"));
+		RuntimeDependencies.Add(Path.Combine(ThirdPartyDir, "bin/boost_container-vc144-mt-x64-1_85.dll"));
+		RuntimeDependencies.Add(Path.Combine(ThirdPartyDir, "bin/boost_random-vc144-mt-x64-1_85.dll"));
+		RuntimeDependencies.Add(Path.Combine(ThirdPartyDir, "bin/boost_regex-vc144-mt-x64-1_85.dll"));
+		RuntimeDependencies.Add(Path.Combine(ThirdPartyDir, "bin/boost_system-vc144-mt-x64-1_85.dll"));
 		
 		PublicDependencyModuleNames.AddRange(
 			new string[]

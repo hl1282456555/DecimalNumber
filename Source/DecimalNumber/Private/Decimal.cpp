@@ -179,7 +179,7 @@ FDecimal FDecimal::operator+(const FDecimal& Other) const
 {
 	FDecimal Result(*this);
 	Result.InternalValue += Other.InternalValue;
-	
+
 	return Result;
 }
 

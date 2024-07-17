@@ -3,7 +3,27 @@
 #include "DecimalNumber.h"
 #include "IPluginManager.h"
 
+THIRD_PARTY_INCLUDES_START
+#include <boost/assert/source_location.hpp>
+THIRD_PARTY_INCLUDES_END
+
+DECLARE_LOG_CATEGORY_CLASS(LogDecimalNumber, Log, All);
+
 #define LOCTEXT_NAMESPACE "FDecimalNumberModule"
+
+namespace boost
+{
+	void throw_exception(std::exception const& e)
+	{
+		UE_LOG(LogDecimalNumber, Error, TEXT("[DecimalNumber][boost] - %s"), *FString(e.what()));
+	}
+	
+	void throw_exception(std::exception const& e, boost::source_location const& loc)
+	{
+		UE_LOG(LogDecimalNumber, Error, TEXT("[DecimalNumber][boost][%s-%s-%d-%d] - %s"),
+			*FString(loc.file_name()), *FString(loc.function_name()), loc.line(), loc.column(), *FString(e.what()));
+	}
+}
 
 void FDecimalNumberModule::StartupModule()
 {
@@ -19,7 +39,7 @@ void FDecimalNumberModule::StartupModule()
 	const FString PluginDir = IPluginManager::Get().FindPlugin("DecimalNumber")->GetBaseDir();
 	for (const FString& DllName : DllNames)
 	{
-		void* NewHandle = FPlatformProcess::GetDllHandle(*FPaths::Combine(PluginDir, "ThirdParty/boost_multiprecision_1.8.5", DllName));
+		void* NewHandle = FPlatformProcess::GetDllHandle(*FPaths::Combine(PluginDir, "ThirdParty/boost_multiprecision_1.8.5/bin", DllName));
 		if (NewHandle == nullptr)
 		{
 			UE_LOG(LogTemp, Error, TEXT("%s - Failed to load dependency dll '%s'"), __FUNCTIONW__, *DllName);
