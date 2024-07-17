@@ -197,6 +197,13 @@ public:
 		return UE::Math::TVector<T>((T)X.ToDouble(), (T)Y.ToDouble(), (T)Z.ToDouble());
 	}
 
+	template <typename T, TEMPLATE_REQUIRES(std::is_arithmetic<T>::value)>
+	FORCEINLINE FDecimalVector& operator=(const UE::Math::TVector<T>& V)
+	{
+		X = V.X; Y = V.Y; Z = V.Z;
+		return *this;
+	}
+
 	/**
 	* Copy all component-wise values from another vector.
 	* 
